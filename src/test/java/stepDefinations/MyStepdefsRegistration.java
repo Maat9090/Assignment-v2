@@ -20,6 +20,7 @@ import java.util.Random;
 public class MyStepdefsRegistration {
     WebDriver  driver = new ChromeDriver();
     //**********************************************
+
     private String randomEmail;
 
     public String generateRandomEmail() {
