@@ -1,5 +1,6 @@
 package stepDefinations;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -154,8 +155,54 @@ public class MyStepdefsRegistration {
         String actualText = element.getText();
         String expectedText = "THANK YOU FOR CREATING AN ACCOUNT WITH BASKETBALL ENGLAND";
         Assert.assertEquals("The text is incorrect", expectedText, actualText);
+    }
 
+    //2****************************************************************************
+    @And("I will leave the last name field blank")
+    public void iWillLeaveTheLastNameFieldBlank() {
+        WebElement lName = driver.findElement(By.id("member_lastname"));
+        lName.clear();
+    }
+
+    @Then("A warning message should be displayed on the last name field")
+    public void aWarningMessageShouldBeDisplayed() {
+        WebElement text = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[5]/div[2]/div/span/span"));
+        String actualText = text.getText();
+        String expectedText= "Last Name is required";
+        Assert.assertEquals("The text is incorrect", expectedText, actualText);
+    }
+    //3****************************************************************************
+    @And("I enter a password that does not match")
+    public void iEnterAPasswordThatDoesNotMatch() {
+        WebElement retyePassWord = driver.findElement(By.id("signupunlicenced_confirmpassword"));
+        retyePassWord.sendKeys("Password000");
+    }
+
+    @Then("A warning message should be displayed on the password field")
+    public void aWarningMessageShouldBeDisplayedOnThePasswordField() {
+        WebElement text = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[8]/div/div[2]/div[2]/div/span/span"));
+        String actualText = text.getText();
+        String expectedText= "Password did not match";
+        Assert.assertEquals("The text is incorrect", expectedText, actualText);
+    }
+    //4****************************************************************************
+    @And("I do not accept the terms and conditions")
+    public void iDoNotAcceptTheTermsAndConditions() {
+        WebElement selection  = driver.findElement(By.cssSelector("#signup_form > div:nth-child(12) > div > div:nth-child(2) > div:nth-child(1) > label > span.box"));
 
     }
 
+    @Then("A warning message should be displayed on the conditions are not accepted field")
+    public void aWarningMessageShouldBeDisplayedOnTheConditionsAreNotAcceptedField() {
+        WebElement text = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[11]/div/div[2]/div[1]/span/span"));
+        String actualText = text.getText();
+        String expectedText= "You must confirm that you have read and accepted our Terms and Conditions";
+        Assert.assertEquals("The text is incorrect", expectedText, actualText);
+    }
+
+//    @After
+//    public void tearDown{
+//
+//    }
 }
+
