@@ -3,7 +3,7 @@ Feature: User Registration
 
   Scenario: Successfully create an account
 
-    Given I am using "chrome" as browser
+    Given I am using "firefox" as browser
     Given I am on the Create an Account page
     When I enter the date of birth dateOfBirth with the correct format
     And I enter the first name first Name

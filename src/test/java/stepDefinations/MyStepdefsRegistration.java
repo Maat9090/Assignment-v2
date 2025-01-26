@@ -1,6 +1,5 @@
 package stepDefinations;
 
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,7 +7,6 @@ import io.cucumber.java.en.When;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,16 +14,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-;import java.time.Duration;
+import java.time.Duration;
 import java.util.Random;
 
 
 public class MyStepdefsRegistration {
-//    WebDriver  driver = new ChromeDriver();
-  //  WebDriver driver = new EdgeDriver();
-WebDriver  driver;
-    //**********************************************
 
+    WebDriver  driver;
+
+//**********************************************
     private String randomEmail;
 
     public String generateRandomEmail() {
@@ -44,13 +41,10 @@ WebDriver  driver;
 
         return email.toString();
     }
-    //************************************************
+
+    //***********Testfallen skall köras på minst två browsrar ******************************
     @Given("I am using {string} as browser")
     public void iAmUsingAsBrowser(String browser) {
-        // driver = new ChromeDriver();
-//        driver = new EdgeDriver();
-
-
         if(browser.equals("firefox")) {
             driver = new FirefoxDriver();
         }
@@ -60,7 +54,6 @@ WebDriver  driver;
         else{
             driver = new ChromeDriver();
           }
-
     }
 
      @Given("I am on the Create an Account page")
@@ -159,24 +152,28 @@ WebDriver  driver;
         selection.click();
     }
 
+    //******************************Explicit wait*****************************************
+    private WebElement waitForElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
 
+        }
     @And("I click the confirm and Join button")
     public void iClickTheConfirmAndJoinButton() throws InterruptedException {
-        WebElement button  = driver.findElement(By.cssSelector("#signup_form > div.form-actions.noborder > input"));
-        Thread.sleep(1000);
+        By locator = By.cssSelector("#signup_form > div.form-actions.noborder > input");
+        WebElement button = waitForElement(locator);
         button.click();
-    }
 
+    }
     @Then("an account should be created successfully")
     public void anAccountShouldBeCreatedSuccessfully() {
-
         WebElement element = driver.findElement(By.cssSelector("body > div > div.page-content-wrapper > div > h2"));
         String actualText = element.getText();
         String expectedText = "THANK YOU FOR CREATING AN ACCOUNT WITH BASKETBALL ENGLAND";
         Assert.assertEquals("The text is incorrect", expectedText, actualText);
     }
 
-    //2****************************************************************************
+    //***********************************2**********************************************
     @And("I will leave the last name field blank")
     public void iWillLeaveTheLastNameFieldBlank() {
         WebElement lName = driver.findElement(By.id("member_lastname"));
@@ -190,7 +187,7 @@ WebDriver  driver;
         String expectedText= "Last Name is required";
         Assert.assertEquals("The text is incorrect", expectedText, actualText);
     }
-    //3****************************************************************************
+    //**************************************3**********************************************
     @And("I enter a password that does not match")
     public void iEnterAPasswordThatDoesNotMatch() {
         WebElement retyePassWord = driver.findElement(By.id("signupunlicenced_confirmpassword"));
@@ -204,7 +201,7 @@ WebDriver  driver;
         String expectedText= "Password did not match";
         Assert.assertEquals("The text is incorrect", expectedText, actualText);
     }
-    //4****************************************************************************
+    //*************************************4***************************************
     @And("I do not accept the terms and conditions")
     public void iDoNotAcceptTheTermsAndConditions() {
         WebElement selection  = driver.findElement(By.cssSelector("#signup_form > div:nth-child(12) > div > div:nth-child(2) > div:nth-child(1) > label > span.box"));
