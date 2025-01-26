@@ -200,9 +200,5 @@ public class MyStepdefsRegistration {
         Assert.assertEquals("The text is incorrect", expectedText, actualText);
     }
 
-//    @After
-//    public void tearDown{
-//
-//    }
 }
 
