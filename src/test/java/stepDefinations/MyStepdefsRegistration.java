@@ -191,7 +191,6 @@ public class MyStepdefsRegistration {
         WebElement selection  = driver.findElement(By.cssSelector("#signup_form > div:nth-child(12) > div > div:nth-child(2) > div:nth-child(1) > label > span.box"));
 
     }
-
     @Then("A warning message should be displayed on the conditions are not accepted field")
     public void aWarningMessageShouldBeDisplayedOnTheConditionsAreNotAcceptedField() {
         WebElement text = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[11]/div/div[2]/div[1]/span/span"));
