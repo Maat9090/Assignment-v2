@@ -79,4 +79,3 @@ Feature: User Registration
     And I agree to the codeOfEthicsAndConduct
     And I click the confirm and Join button
     Then A warning message should be displayed on the conditions are not accepted field
-

@@ -177,7 +177,6 @@ public class MyStepdefsRegistration {
         WebElement retyePassWord = driver.findElement(By.id("signupunlicenced_confirmpassword"));
         retyePassWord.sendKeys("Password000");
     }
-
     @Then("A warning message should be displayed on the password field")
     public void aWarningMessageShouldBeDisplayedOnThePasswordField() {
         WebElement text = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[8]/div/div[2]/div[2]/div/span/span"));
